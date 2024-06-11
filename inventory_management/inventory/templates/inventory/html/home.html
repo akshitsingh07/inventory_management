@@ -10,6 +10,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
     <title>ITC Inventory Management System</title>
+    <script>
+        function toggleLowQuantityItems() {
+            var lowQuantityItems = document.getElementById("low-quantity-items");
+            if (lowQuantityItems.style.display === "none") {
+                lowQuantityItems.style.display = "block";
+            } else {
+                lowQuantityItems.style.display = "none";
+            }
+        }
+    </script>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -47,6 +57,36 @@
     </form>
   </div>
 </nav>
+   {% if low_quantity_count > 0 %}
+   <marquee style = "color:red;font-weight:bold;font-size:30px"behavior="scroll" direction="left">{{ low_quantity_count }} Items quantity is low!
+        <button class= "btn btn-danger" onclick="toggleLowQuantityItems()">
+            Click here to check!
+        </button>
+    </marquee>
+<div id="low-quantity-items" style = "display: none">
+    <h2 style = "color:red; text-align: center">Items with Low Quantity</h2>
+    <div class="row">
+        {% for item in low_quantity_items %}
+        <div class="col-sm-4">
+            <div class="bg-primary card">
+                <div class="card-body">
+                    <h4 class="card-title">Name: {{ item.item.name }}</h5>
+                    <h5 class="card-title">Category: {{ item.category.name }}</h5>
+                    <h5 class="card-title">ID: {{ item.custom_item_id }}</h5>
+                    <h5 class="card-title">Date of Purchase: {{ item.date_of_purchase }}</h5>
+                    <h5 class="card-title">Quantity: {{ item.quantity }}</h5>
+                    <h5 class="card-title">Cost/unit: {{item.cost}} INR</h5>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+
+
 <div class="row">
     {%for obj in purchase%}
   <div class="col-sm-4">
