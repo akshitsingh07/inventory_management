@@ -116,7 +116,7 @@ Open an issue or submit a pull request—happy to collaborate!
 
 ## 📄 License
 
-Specify your license here (e.g., MIT, Apache 2.0).
+MIT, Apache 2.0.
 
 ---
 
